@@ -10,30 +10,35 @@ import org.springframework.context.annotation.Profile;
 
 import com.torres.springBoot.entities.Category;
 import com.torres.springBoot.entities.Order;
+import com.torres.springBoot.entities.OrderItem;
 import com.torres.springBoot.entities.Product;
 import com.torres.springBoot.entities.User;
 import com.torres.springBoot.entities.enums.OrderStatus;
 import com.torres.springBoot.repositories.CategoryRepository;
+import com.torres.springBoot.repositories.OrderItemRepository;
 import com.torres.springBoot.repositories.OrderRepository;
 import com.torres.springBoot.repositories.ProductRepository;
 import com.torres.springBoot.repositories.UserRepository;
 
-@Configuration //configuration class
+@Configuration // configuration class
 @Profile("test")
 public class TestConfig implements CommandLineRunner {
-	
+
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	private OrderRepository orderRepository;
-	
+
 	@Autowired
 	private CategoryRepository categoryRepository;
-	
+
 	@Autowired
 	private ProductRepository productRepository;
-	
+
+	@Autowired
+	private OrderItemRepository orderItemRepository;
+
 	@Override
 	public void run(String... args) throws Exception {
 		
@@ -65,6 +70,12 @@ public class TestConfig implements CommandLineRunner {
 		userRepository.saveAll(Arrays.asList(u1, u2));
 		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
 		
+		OrderItem oi1 = new OrderItem(o1, p1, 1, p1.getPrice());
+		OrderItem oi2 = new OrderItem(o2, p2, 2, p2.getPrice());
+		OrderItem oi3 = new OrderItem(o3, p3, 2, p3.getPrice());
+		
+		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3));
+		
 	}
-	
+
 }
