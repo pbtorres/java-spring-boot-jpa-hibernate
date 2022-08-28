@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.torres.springBoot.entities.Category;
 import com.torres.springBoot.entities.Order;
+import com.torres.springBoot.entities.Product;
 import com.torres.springBoot.entities.User;
 import com.torres.springBoot.entities.enums.OrderStatus;
 import com.torres.springBoot.repositories.CategoryRepository;
 import com.torres.springBoot.repositories.OrderRepository;
+import com.torres.springBoot.repositories.ProductRepository;
 import com.torres.springBoot.repositories.UserRepository;
 
 @Configuration //configuration class
@@ -29,6 +31,9 @@ public class TestConfig implements CommandLineRunner {
 	@Autowired
 	private CategoryRepository categoryRepository;
 	
+	@Autowired
+	private ProductRepository productRepository;
+	
 	@Override
 	public void run(String... args) throws Exception {
 		
@@ -37,7 +42,13 @@ public class TestConfig implements CommandLineRunner {
 		Category c3 = new Category(null, "Computers");
 		
 		categoryRepository.saveAll(Arrays.asList(c1, c2, c3));
+		
+		Product p1 = new Product(null, "Mouse", "Mouse", 49.90, "/img/mouse");
+		Product p2 = new Product(null, "Código Limpo", "Livro", 79.90, "/img/codigo_limpo");
+		Product p3 = new Product(null, "Processador", "Processador", 900.00, "/img/processador");
 
+		productRepository.saveAll(Arrays.asList(p1, p2, p3));
+		
 		User u1 = new User(null, "Paulo", "paulo@gmail.com", "99999999999", "123456");
 		User u2 = new User(null, "João", "joao@gmail.com", "99999999999", "123456");
 		
